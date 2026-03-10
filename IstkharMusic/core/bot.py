@@ -2,15 +2,14 @@ from pyrogram import Client, errors
 from pyrogram.enums import ChatMemberStatus, ParseMode
 
 import config
-
 from ..logging import LOGGER
 
 
-class Istu(Client):
+class ISTKHAR(Client):
     def __init__(self):
-        LOGGER(__name__).info(f"» sᴛᴀʀᴛɪɴɢ ʙᴏᴛ...")
+        LOGGER(__name__).info(f"sᴛʀᴀᴛɪɴɢ ʙᴏᴛ...")
         super().__init__(
-            name="IstkharMusic",
+            name="ISTKHAR_MUSIC",
             api_id=config.API_ID,
             api_hash=config.API_HASH,
             bot_token=config.BOT_TOKEN,
@@ -29,22 +28,31 @@ class Istu(Client):
             await self.send_message(
                 chat_id=config.LOGGER_ID,
                 text=(
-                    f"<u><b>» {self.mention} ʙᴏᴛ sᴛᴀʀᴛᴇᴅ :</b></u>\n\n"
-                    f"ɪᴅ : <code>{self.id}</code>\n"
-                    f"ɴᴀᴍᴇ : {self.name}\n"
-                    f"ᴜsᴇʀɴᴀᴍᴇ : @{self.username}"
+                    f"<u><b>» {self.mention}</u> ʙᴏᴛ sᴛᴀʀᴛᴇᴅ :-</b>\n\n"
+                    f"ɪᴅ :- <code>{self.id}</code>\n"
+                    f"ɴᴀᴍᴇ :- {self.name}\n"
+                    f"ᴜsᴇʀɴᴀᴍᴇ :- @{self.username}"
                 ),
             )
-        except:
+        except (errors.ChannelInvalid, errors.PeerIdInvalid):
             LOGGER(__name__).error(
-                "» ʙᴏᴛ ʜᴀs ғᴀɪʟᴇᴅ ᴛᴏ ᴀᴄᴄᴇss ᴛʜᴇ ʟᴏɢ ɢʀᴏᴜᴘ/ᴄʜᴀɴɴᴇʟ. ᴍᴀᴋᴇ sᴜʀᴇ ᴛʜᴀᴛ ʏᴏᴜ ʜᴀᴠᴇ ᴀᴅᴅᴇᴅ ʏᴏᴜʀ ʙᴏᴛ ᴛᴏ ʏᴏᴜʀ ʟᴏɢ ɢʀᴏᴜᴘ/ᴄʜᴀɴɴᴇʟ."
+                "ʙᴏᴛ ʜᴀs ғᴀɪʟᴇᴅ ᴛᴏ ᴀᴄᴄᴇss ᴛʜᴇ ʟᴏɢ ɢʀᴏᴜᴘ/ᴄʜᴀɴɴᴇʟ. ᴍᴀᴋᴇ sᴜʀᴇ ʙᴏᴛ ɪs ᴀᴅᴅᴇᴅ ᴛʜᴇʀᴇ."
             )
+            exit()
+        except Exception as ex:
+            LOGGER(__name__).error(
+                f"ʙᴏᴛ ʜᴀs ғᴀɪʟᴇᴅ ᴛᴏ ᴀᴄᴄᴇss ᴛʜᴇ ʟᴏɢ ɢʀᴏᴜᴘ/ᴄʜᴀɴɴᴇʟ.\n  ʀᴇᴀsᴏɴ :- {type(ex).__name__}."
+            )
+            exit()
+
         a = await self.get_chat_member(config.LOGGER_ID, self.id)
         if a.status != ChatMemberStatus.ADMINISTRATOR:
             LOGGER(__name__).error(
-                "» ᴘʟᴇᴀsᴇ ᴘʀᴏᴍᴏᴛᴇ ʏᴏᴜʀ ʙᴏᴛ ᴀs ᴀɴ ᴀᴅᴍɪɴ ɪɴ ʏᴏᴜʀ ʟᴏɢ ɢʀᴏᴜᴘ/ᴄʜᴀɴɴᴇʟ."
+                "ᴘʟᴇᴀsᴇ ᴘʀᴏᴍᴏᴛᴇ ʏᴏᴜʀ ʙᴏᴛ ᴀs ᴀɴ ᴀᴅᴍɪɴ ɪɴ ʏᴏᴜʀ ʟᴏɢ ɢʀᴏᴜᴘ/ᴄʜᴀɴɴᴇʟ."
             )
-        LOGGER(__name__).info(f"✦ ᴍᴜsɪᴄ ʙᴏᴛ sᴛᴀʀᴛᴇᴅ ᴀs {self.name}")
+            exit()
+
+        LOGGER(__name__).info(f"ᴍᴜsɪᴄ ʙᴏᴛ sᴛᴀʀᴛᴇᴅ ᴀs {self.name}")
 
     async def stop(self):
         await super().stop()
