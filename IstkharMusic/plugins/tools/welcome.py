@@ -61,7 +61,7 @@ def circle(pfp, size=(390, 390), brightness_factor=1.4):
 
 
 def welcomepic(pic, user, chatname, id, uname, brightness_factor=1.3):
-    background = Image.open("IstkharMusic/assets/shiviwel2.png").convert("RGBA")
+    background = Image.open("IstkharMusic/assets/nand.png").convert("RGBA")
 
     pfp = Image.open(pic).convert("RGBA")
     pfp = circle(pfp, size=(390, 390), brightness_factor=brightness_factor)
@@ -145,7 +145,7 @@ async def greet_new_member(_, member: ChatMemberUpdated):
                 user.photo.big_file_id, file_name=f"pp{user.id}.png"
             )
         except:
-            pic = "IstkharMusic/assets/upic.png"
+            pic = "IstkharMusic/assets/nand.png"
 
         old = temp.MELCOW.get(f"welcome-{chat_id}")
         if old:
